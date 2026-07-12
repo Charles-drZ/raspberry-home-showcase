@@ -1,6 +1,8 @@
 # Raspberry Home — Documentation Case Study
 
-This repository is a sanitized documentation case study for a Raspberry Pi, Home Assistant, networking, and remote-maintenance lab. It demonstrates repeatable documentation and troubleshooting patterns; it does not describe a real installation.
+This repository is a documentation case study for a Raspberry Pi, Home Assistant, networking, and remote-maintenance lab.
+
+It matters because repeatable documentation, safety boundaries, and clear troubleshooting records make systems easier to maintain and hand over.
 
 ## What this showcases
 
@@ -35,9 +37,17 @@ The diagram is illustrative only. It contains no real topology, address, device,
 - [Security principles](docs/security-principles.md)
 - [Troubleshooting method](docs/troubleshooting-method.md)
 - [Generic site handover template](templates/site-handover-template.md)
+- [Changelog](CHANGELOG.md)
 
 ## Safety boundary
 
 No real IP addresses, locations, customer information, hostnames, device identifiers, credentials, remote-access details, screenshots, or network diagrams are included.
 
-This repository is a portfolio case study, not a deployment package.
+## Related repositories
+
+- [Public developer profile](https://github.com/Charles-drZ/Charles-drZ)
+- [GlassBox product case study](https://github.com/Charles-drZ/glassbox-showcase)
+- [GlassBox development workflow](https://github.com/Charles-drZ/glassbox-development-workflow)
+- [Automation workflow case study](https://github.com/Charles-drZ/automation-workflow-showcase)
+
+This is a public portfolio case study, not a deployment package.
