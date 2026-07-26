@@ -93,6 +93,8 @@ Privacy-reviewed visuals will be added incrementally as the private dashboard an
 
 Every image must exclude real entity identifiers, locations, household details, notifications, accounts, diagnostics, and network information. Product screenshots are evidence, not configuration exports.
 
+See the [visual publication plan](assets/SCREENSHOT_PLAN.md) for the planned capture set, household-privacy rules, and pre-publication checklist.
+
 ## Public boundary
 
 The project is deliberately split into two layers:
@@ -112,6 +114,7 @@ This repository contains no real IP addresses, locations, hostnames, entity iden
 - [Architecture and responsibility boundaries](docs/architecture.md)
 - [Security and privacy principles](docs/security-principles.md)
 - [Troubleshooting method](docs/troubleshooting-method.md)
+- [Visual publication plan](assets/SCREENSHOT_PLAN.md)
 - [Changelog](CHANGELOG.md)
 
 ## Related work
