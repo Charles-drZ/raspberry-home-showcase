@@ -50,7 +50,7 @@ The v1 rollout was validated on the real Raspberry Pi-hosted Home Assistant envi
 ## Delivery model
 
 ```mermaid
-flowchart LR
+flowchart TD
     SCOPE[Reviewed scope] --> CHECKS[Repository safety checks]
     CHECKS --> PLAN[Read-only change review]
     PLAN --> APPROVAL[Human approval]
