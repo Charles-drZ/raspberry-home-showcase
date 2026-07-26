@@ -1,3 +1,5 @@
+[← Raspberry Home case study](../README.md)
+
 # Controlled change and recovery model
 
 ## Goal
@@ -86,3 +88,7 @@ This repository does not publish:
 ## Why this matters
 
 A dashboard change can look small while still affecting an always-on household service. The engineering value is not a particular script: it is the discipline of separating scope, approval, recovery, runtime evidence, and user acceptance.
+
+---
+
+[← Return to Raspberry Home case study](../README.md)
