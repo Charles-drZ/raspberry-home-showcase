@@ -1,8 +1,8 @@
 # Raspberry Home — Versioned Home Assistant & Safe Operations Case Study
 
-Raspberry Home is a privacy-aware homelab project showing how I turned a working Raspberry Pi 5 and Home Assistant environment into a versioned, reviewable, rollback-safe, and cross-client validated platform.
+Raspberry Home is a privacy-aware homelab project showing how I turned a working Raspberry Pi 5 and Home Assistant environment into a versioned, reviewable, rollback-aware, and cross-client validated platform.
 
-> **This case study demonstrates that I can move beyond local configuration changes and build a controlled operational workflow with source boundaries, CI, backup, rollback, runtime evidence, and user acceptance.**
+> **This case study demonstrates controlled technical delivery, runtime validation, and user-facing Home Assistant work without publishing the private configuration or a reusable deployment package.**
 
 ## At a glance
 
@@ -11,30 +11,28 @@ Raspberry Home is a privacy-aware homelab project showing how I turned a working
 | Runtime | Raspberry Pi 5 with Docker and Home Assistant |
 | Product surface | Separate responsive Home Assistant dashboard |
 | Client validation | Desktop browser and iOS Companion App |
-| Operations | Guarded deploy, backup, config check, rollback, explicit restart |
-| Quality controls | GitHub Actions, repository safety checks, synthetic workflow tests, runtime smoke |
+| Operations | Reviewed change, backup, validation, rollback, and explicit restart boundaries |
+| Quality controls | GitHub Actions, repository safety checks, runtime smoke, and user acceptance |
 | Release state | Production-validated v1; additional themes and visual refinements continue privately |
-| Public material | Sanitized architecture, generic examples, and verified outcomes |
+| Public material | Engineering decisions, privacy-reviewed outcomes, and non-deployable diagrams |
 
 ## What this proves
 
 - I can inspect a real running system and separate runtime truth from outdated documentation.
 - I can version selected configuration without turning Git into an unsafe copy of the live environment.
-- I can design production changes around read-only planning, explicit approval, backup, validation, and rollback.
+- I can design production changes around review, backup, validation, rollback, and explicit operational boundaries.
 - I can build a responsive Home Assistant UI and verify it across desktop and iOS clients.
 - I can diagnose a client-specific visual defect, correct it, and repeat the acceptance cycle.
-- I can publish useful engineering evidence without exposing household, network, credential, or device details.
+- I can publish credible engineering evidence without exposing household, network, credential, device, or implementation details.
 
 ## What I built
 
-- A separate version-controlled Home Assistant dashboard that leaves the existing default Overview untouched.
-- A responsive room-oriented UI using native Home Assistant Sections, Tile, Thermostat, Humidifier, and Weather cards.
-- A custom dark visual system that behaves consistently in desktop browsers and the iOS Companion App.
-- An exact source-to-target deployment contract instead of copying an entire runtime configuration directory.
-- A guarded configuration bootstrap with baseline verification.
-- Timestamped backup, configuration validation, automatic rollback, and explicit restart boundaries.
-- GitHub Actions checks for shell syntax, repository safety, dashboard structure, and synthetic apply/rollback behavior.
-- A GitHub Issues and reviewed Markdown workflow for active work, runtime evidence, and durable operational memory.
+- A separate, version-controlled Home Assistant dashboard that preserves the existing default Overview.
+- A responsive room-oriented interface built from native Home Assistant components.
+- A dark visual system validated in both desktop browsers and the iOS Companion App.
+- A controlled delivery workflow with reviewed source boundaries, backup, configuration validation, rollback, and explicit restart decisions.
+- GitHub Actions checks for repository safety and change quality.
+- A reviewed documentation flow for decisions, runtime evidence, and future maintenance.
 
 ## Verified outcome
 
@@ -42,94 +40,78 @@ The v1 rollout was validated on the real Raspberry Pi-hosted Home Assistant envi
 
 - pre-change and post-change configuration checks passed;
 - reviewed dashboard and theme sources matched the deployed state;
-- Home Assistant restarted and returned to service in approximately six seconds;
-- the Home Assistant root and the new dashboard returned HTTP `200`;
-- no relevant Lovelace, traceback, or configuration errors appeared after restart;
+- Home Assistant returned to service successfully after the approved restart;
+- application and dashboard availability checks passed;
+- no relevant startup or configuration errors were found;
 - desktop browser acceptance passed;
 - iOS Companion App acceptance passed;
-- a cross-client theme difference found during mobile testing was corrected and revalidated.
+- a cross-client visual inconsistency found during mobile testing was corrected and revalidated.
 
-## Delivery architecture
+## Delivery model
 
 ```mermaid
 flowchart LR
-    DEV[Reviewed Git branch] --> CI[Safety and structure checks]
-    CI --> PLAN[Read-only deployment plan]
-    PLAN --> APPROVAL[Explicit human approval]
-    APPROVAL --> BACKUP[Timestamped backup]
-    BACKUP --> APPLY[Allowlisted file deploy]
-    APPLY --> CHECK[Home Assistant config check]
-    CHECK -->|pass| RESTART[Explicit restart]
-    CHECK -->|fail| ROLLBACK[Automatic rollback]
-    RESTART --> SMOKE[HTTP and UI smoke tests]
-    SMOKE --> ACCEPT[Desktop and iOS acceptance]
-    ACCEPT --> MEMORY[Reviewed runtime evidence]
+    SCOPE[Reviewed scope] --> CHECKS[Repository safety checks]
+    CHECKS --> PLAN[Read-only change review]
+    PLAN --> APPROVAL[Human approval]
+    APPROVAL --> BACKUP[Protected recovery point]
+    BACKUP --> CHANGE[Bounded runtime change]
+    CHANGE --> VALIDATE[Configuration and runtime validation]
+    VALIDATE -->|pass| ACCEPT[Desktop and iOS acceptance]
+    VALIDATE -->|fail| RECOVER[Rollback]
+    ACCEPT --> MEMORY[Reviewed operational evidence]
 ```
 
-The public diagram describes roles and controls. The live topology, addresses, paths, device identifiers, and access details remain private.
+The diagram communicates responsibility and evidence flow only. The live topology, configuration, paths, scripts, mappings, identifiers, and access details remain private.
 
 ## Dashboard and UX work
 
-The dashboard uses native Home Assistant components rather than adding frontend dependencies solely for appearance.
+The interface is organised around everyday user intent rather than integrations or vendors. It provides environmental context, common lighting and climate controls, room-level state, touch-friendly actions, and maintenance information.
 
-The v1 information architecture covers:
-
-- environmental and weather overview;
-- primary lighting and climate controls;
-- room-level humidity and device state;
-- touch-friendly frequently used actions;
-- maintenance and utility information.
-
-The interface is multi-column on desktop and naturally reflows for mobile use. The existing default Overview remains available as a fallback rather than being replaced.
+The layout uses the platform's responsive behaviour so the same information hierarchy works across a desktop browser and a mobile companion app. The existing Overview remains available as a fallback rather than being replaced.
 
 ## Cross-client lesson
 
-The first desktop validation looked correct, while the iOS app requested a different theme mode and exposed fallback surfaces. The correction defined the critical visual variables consistently across root, light, and dark theme branches, followed by another exact deploy, configuration check, restart, and iOS acceptance pass.
+Desktop validation alone was not enough. The first iOS pass exposed a theme-mode difference that produced inconsistent surfaces. I corrected the visual definitions, deployed the reviewed change through the same controlled workflow, and repeated desktop and iOS acceptance.
 
-This is a practical example of why browser success alone is not sufficient evidence for a multi-client UI.
+This demonstrates the value of validating the actual client experience instead of treating a successful configuration check or browser view as complete proof.
 
 ## Technology
 
-Raspberry Pi 5 · Docker · Home Assistant · YAML · Bash · Git · GitHub pull requests · GitHub Actions · GitHub Issues · Markdown / Obsidian-style durable documentation
+Raspberry Pi 5 · Docker · Home Assistant · YAML · Bash · Git · GitHub pull requests · GitHub Actions · GitHub Issues · Markdown-based operational documentation
 
-The validated v1 uses native Home Assistant UI components. No custom HTML frontend, custom JavaScript card, Mushroom, card-mod, or similar dependency is claimed.
+The validated v1 uses native Home Assistant UI components. No custom HTML frontend, custom JavaScript card, or third-party styling framework is claimed.
 
 ## Visual evidence
 
-The case study is ready for visuals to be added incrementally as the private dashboard and additional themes stabilize.
+Privacy-reviewed visuals will be added incrementally as the private dashboard and additional themes stabilise:
 
-Planned privacy-reviewed additions include:
-
-- a desktop dashboard overview;
-- an iOS Companion App view;
+- desktop dashboard overview;
+- iOS Companion App view;
 - selected theme variants;
-- a safe before-and-after presentation of the cross-client correction.
+- a safe presentation of the cross-client correction.
 
-Each image must be cropped, redrawn, blurred, renamed, or replaced with a synthetic mockup when necessary. No real entity ID, location, household detail, notification, account, or network information may be visible.
+Every image must exclude real entity identifiers, locations, household details, notifications, accounts, diagnostics, and network information. Product screenshots are evidence, not configuration exports.
 
 ## Public boundary
 
 The project is deliberately split into two layers:
 
-- a private operational repository containing real environment knowledge and reviewed source configuration;
-- this public showcase containing only sanitized architecture, generic examples, and verified outcomes.
+- a private operational repository containing the reviewed implementation, real environment knowledge, evidence, and recovery procedures;
+- this public case study containing only independently written explanations, non-deployable diagrams, and verified outcomes.
 
-This repository contains no real IP addresses, locations, hostnames, entity identifiers, device IDs, credentials, remote-access details, private keys, backup archives, raw logs, or copied production topology.
+This repository contains no real IP addresses, locations, hostnames, entity identifiers, device IDs, credentials, remote-access details, private keys, backup archives, raw logs, copied production topology, deploy mappings, executable operations scripts, or reusable configuration examples.
 
-It is a portfolio case study, not a deployment package. Generic examples illustrate engineering principles but do not reproduce the private operational repository.
+**This is a portfolio case study, not a deployment package.**
 
 ## Explore the case study
 
-- [Home Assistant UI architecture](docs/home-assistant-ui-architecture.md)
-- [Safe change and rollback workflow](docs/safe-change-workflow.md)
+- [Home Assistant UI and UX decisions](docs/home-assistant-ui-architecture.md)
+- [Controlled change and recovery model](docs/safe-change-workflow.md)
 - [Sanitized validation evidence](docs/validation-evidence.md)
-- [Architecture and service roles](docs/architecture.md)
+- [Architecture and responsibility boundaries](docs/architecture.md)
 - [Security and privacy principles](docs/security-principles.md)
 - [Troubleshooting method](docs/troubleshooting-method.md)
-- [Sanitized dashboard example](examples/dashboard.sanitized.yaml)
-- [Cross-client dark theme example](examples/raspberry-home-theme.yaml)
-- [Exact deployment map example](examples/deploy-map.example.tsv)
-- [Generic site handover template](templates/site-handover-template.md)
 - [Changelog](CHANGELOG.md)
 
 ## Related work
