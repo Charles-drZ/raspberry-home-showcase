@@ -1,4 +1,14 @@
+[← Raspberry Home case study](README.md)
+
 # Changelog
+
+## 2026-07-26 — deep documentation and mobile UX hardening
+
+- Added coherent return navigation across the linked architecture, UI, operations, validation, security, and troubleshooting documents.
+- Converted the validation result matrix and troubleshooting record into mobile-friendly scannable blocks.
+- Changed the remaining horizontal evidence-flow diagram to top-down rendering.
+- Generalized security and troubleshooting detail so the public repository proves engineering judgement without becoming a reusable operations guide.
+- Preserved the production-validated result, cross-client lesson, and explicit non-deployable public boundary.
 
 ## 2026-07-26 — public-boundary hardening
 
@@ -18,9 +28,13 @@
 - Updated architecture, security, and privacy boundaries.
 - Kept all real network, host, entity, credential, and household data private.
 
-## 2026-07-12
+## 2026-07-12 — initial public case study
 
 - Initial public portfolio case study created.
 - Added sanitized documentation and privacy boundaries.
 - Added public-safe project overview and supporting documents.
 - Added related-repository navigation.
+
+---
+
+[← Return to Raspberry Home case study](README.md)
