@@ -1,0 +1,61 @@
+name: Public showcase safety
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Validate whitespace
+        run: git diff --check HEAD~1..HEAD || git diff --check
+
+      - name: Reject private runtime file types
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+          forbidden='(^|/)(\.env|secrets\.yaml|\.storage)(/|$)|\.(db|sqlite|sqlite3|key|pem|p12|pfx|zip|tar|tgz|gz)$'
+          if git ls-files | grep -E "$forbidden"; then
+            echo "Forbidden private or runtime file tracked." >&2
+            exit 1
+          fi
+
+      - name: Scan for high-confidence secrets
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+          patterns='BEGIN (RSA |EC |OPENSSH )?PRIVATE KEY|github_pat_[A-Za-z0-9_]+|ghp_[A-Za-z0-9]+|sk-[A-Za-z0-9]{20,}|Authorization:[[:space:]]*Bearer[[:space:]]+[A-Za-z0-9._-]+'
+          if grep -RInE --exclude-dir=.git "$patterns" .; then
+            echo "High-confidence secret pattern found." >&2
+            exit 1
+          fi
+
+      - name: Reject private IPv4 ranges
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+          patterns='(^|[^0-9])(10\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}|192\.168\.[0-9]{1,3}\.[0-9]{1,3}|172\.(1[6-9]|2[0-9]|3[01])\.[0-9]{1,3}\.[0-9]{1,3})([^0-9]|$)'
+          if grep -RInE --exclude-dir=.git "$patterns" .; then
+            echo "Private IPv4 address found in public showcase." >&2
+            exit 1
+          fi
+
+      - name: Parse YAML examples
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+          while IFS= read -r -d '' file; do
+            ruby -e 'require "yaml"; YAML.load_file(ARGV.fetch(0), aliases: true)' "$file"
+          done < <(find examples -type f -name '*.yaml' -print0)
+
+      - name: Confirm public safety statement
+        run: grep -Fq 'This is a portfolio case study, not a deployment package.' README.md

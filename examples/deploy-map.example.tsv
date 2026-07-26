@@ -1,0 +1,6 @@
+# id	repository_relative_source	runtime_relative_target
+portfolio-theme	home-assistant/themes/portfolio-home.yaml	themes/portfolio-home.yaml
+portfolio-dashboard	home-assistant/dashboards/portfolio-home.yaml	dashboards/portfolio-home.yaml
+
+# Public-safe example only.
+# A production workflow should reject wildcards, directories and targets outside the approved runtime root.
