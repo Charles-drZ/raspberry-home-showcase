@@ -1,141 +1,88 @@
-# Safe change and rollback workflow
+# Controlled change and recovery model
 
 ## Goal
 
-The deployment process must make a Home Assistant change reviewable before it becomes a runtime change, and recoverable if validation fails.
+A Home Assistant change should be reviewable before it reaches the running environment, observable after it is applied, and recoverable when validation fails.
 
-The repository is not a copy of the live `/config` directory. It contains only explicitly approved source files.
+The private repository contains the implementation and operational procedures. This public document explains the responsibility model and evidence expectations without publishing the deploy contract, scripts, paths, commands, hashes, or configuration mechanics.
 
-## Source-of-truth model
+## Sources of truth
 
-- **GitHub Issue:** accepted scope, safety boundary and validation plan.
-- **Git branch and pull request:** reviewed implementation evidence.
-- **Running Home Assistant:** runtime truth.
-- **Sanitized Markdown evidence:** durable operational knowledge.
-- **Public showcase:** reusable patterns only, never the live topology.
+- **Accepted work:** defines the intended outcome and validation boundary.
+- **Reviewed version history:** proves what implementation was approved.
+- **Running Home Assistant:** remains the authority for runtime behaviour.
+- **Validation evidence:** records what was actually checked and observed.
+- **Durable documentation:** preserves reviewed decisions and outcomes.
 
-## Exact deployment contract
-
-Deployment uses an explicit ID and one source-to-target mapping.
-
-```text
-portfolio-theme    home-assistant/themes/portfolio-home.yaml    themes/portfolio-home.yaml
-portfolio-dashboard    home-assistant/dashboards/portfolio-home.yaml    dashboards/portfolio-home.yaml
-```
-
-Wildcards, recursive directory copies and full configuration replacement are rejected.
+These responsibilities are kept separate so that a successful commit, workflow run, or configuration parse is not mistaken for complete runtime acceptance.
 
 ## Change lifecycle
 
 ```mermaid
 stateDiagram-v2
-    [*] --> Planned
-    Planned --> Reviewed: pull request and CI pass
-    Reviewed --> DryRun: read-only plan
-    DryRun --> Approved: human confirms exact change
-    Approved --> BackedUp: timestamped target backup
-    BackedUp --> Applied: atomic file replacement
-    Applied --> Validated: hash and config check pass
-    Applied --> RolledBack: validation fails
-    Validated --> Restarted: explicit restart approved
-    Restarted --> Accepted: HTTP and UI smoke pass
-    Restarted --> RolledBack: smoke fails
-    Accepted --> Documented: evidence reviewed
+    [*] --> Scoped
+    Scoped --> Reviewed
+    Reviewed --> Planned
+    Planned --> Approved
+    Approved --> Protected
+    Protected --> Applied
+    Applied --> Validated
+    Applied --> Recovered: validation fails
+    Validated --> Accepted
+    Validated --> Recovered: acceptance fails
+    Accepted --> Documented
     Documented --> [*]
 ```
 
-## Read-only plan
+## Review before change
 
-The plan phase prints:
+Before a production change, the process establishes:
 
-- deployment ID;
-- reviewed source path;
-- runtime target path;
-- source SHA-256;
-- whether the target is present or absent;
-- current target SHA-256 when present;
-- backup root;
-- the exact apply command.
+- the bounded scope;
+- the intended runtime effect;
+- the protected files or surfaces involved;
+- the validation plan;
+- the recovery expectation;
+- the human approval boundary.
 
-It also runs a baseline Home Assistant configuration check. It performs no file write, backup, reload or restart.
+The planning stage is read-only. It is designed to reveal unintended scope before any runtime mutation occurs.
 
-## Apply safeguards
+## Protected application
 
-An apply requires:
+The private operational process applies only explicitly reviewed changes. It avoids broad filesystem copying and treats configuration registration, service restart, and recovery as separate decisions.
 
-- an exact deployment ID;
-- a matching explicit confirmation value;
-- a clean, allowlisted source and target;
-- a filesystem lock preventing concurrent changes;
-- a timestamped backup directory;
-- atomic write through a temporary target file;
-- post-write SHA-256 verification;
-- a post-write Home Assistant configuration check.
+Implementation details are deliberately excluded from this repository. No public document provides a runnable command sequence or source-to-target mapping.
 
-A validation failure triggers automatic rollback before any restart.
+## Validation and recovery
 
-## Configuration bootstrap
+A successful write is not acceptance. The workflow checks the relevant configuration and service behaviour before the change is considered complete.
 
-Registering a separate YAML dashboard requires a bounded change to `configuration.yaml`.
-
-The bootstrap is more restrictive than an ordinary file deploy:
-
-- it checks an approved baseline SHA-256;
-- it refuses to run when a top-level `lovelace:` key already exists;
-- it adds one marked dashboard-registration block;
-- it stores the complete previous configuration file in the backup;
-- it performs config validation after the write;
-- it does not restart unless explicitly requested.
-
-## Rollback model
-
-Two target states are supported:
-
-- **previously present:** restore the backed-up file;
-- **previously absent:** remove the newly created file.
-
-The configuration bootstrap restores the entire previous `configuration.yaml` file.
-
-Every rollback is followed by another Home Assistant configuration check.
+When validation fails, the process returns the affected surface to its protected previous state and repeats the appropriate checks. Recovery material, exact file state, and operational commands remain private.
 
 ## Restart boundary
 
-A successful config check does not automatically justify a restart. Restart remains a separate, visible action because it temporarily affects the running service.
+A restart temporarily affects a continuously running household service, so it is explicit rather than an invisible side effect of applying files.
 
-After restart the validation checks:
+After an approved restart, acceptance covers service availability, relevant error signals, the intended dashboard surface, and user flows on desktop and mobile clients.
 
-- container running state;
-- Home Assistant HTTP availability;
-- dashboard route availability;
-- configuration validity;
-- relevant startup errors;
-- desktop and mobile user flows.
+## CI boundary
 
-## CI model
+GitHub Actions can validate repository safety and static change quality without accessing the household runtime. Real runtime acceptance remains a separately approved operation performed against the private environment.
 
-GitHub Actions validates the repository without access to the private runtime:
+This prevents CI success from being presented as proof of behaviour it cannot observe.
 
-- whitespace and diff integrity;
-- shell syntax;
-- secret and forbidden-path patterns;
-- dashboard source structure;
-- synthetic plan, apply and rollback;
-- synthetic bootstrap apply and rollback.
+## Public boundary
 
-Real runtime validation remains an explicitly approved local operation.
+This repository does not publish:
 
-## Privacy boundary
-
-The public repository does not contain:
-
-- real target paths beyond generic examples;
-- network addresses or hostnames;
-- real entity IDs;
-- credentials, tokens or keys;
-- raw runtime logs;
-- backup archives;
-- the live configuration tree.
+- deploy mappings or approved runtime paths;
+- scripts, commands, or confirmation contracts;
+- hash baselines or locking mechanics;
+- configuration bootstrap logic;
+- backup locations or archive structure;
+- live topology, identifiers, credentials, or logs;
+- a complete implementation recipe.
 
 ## Why this matters
 
-A smart-home UI change can look small while still affecting a continuously running household service. Treating it as a controlled software release provides traceability, repeatability and a credible rollback path.
+A dashboard change can look small while still affecting an always-on household service. The engineering value is not a particular script: it is the discipline of separating scope, approval, recovery, runtime evidence, and user acceptance.

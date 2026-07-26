@@ -2,102 +2,81 @@
 
 ## Scope
 
-This document records the verified outcome of the Home Assistant dashboard release without exposing the private household configuration.
+This document records the verified outcome of the Home Assistant dashboard release without exposing the household configuration, operational commands, deploy mappings, raw logs, screenshots, or recovery material.
 
-## Tested implementation
+## Validated surface
 
-- Raspberry Pi 5 host
-- Docker-based Home Assistant
-- Home Assistant 2026.6.3 at the time of validation
-- separate YAML-mode dashboard
-- native Home Assistant cards
-- custom cross-client dark theme
-- exact file deployment and guarded dashboard bootstrap
+- Raspberry Pi 5 host with Docker-based Home Assistant;
+- separate responsive dashboard;
+- native Home Assistant interface components;
+- cross-client visual system;
+- controlled change and recovery workflow.
+
+Implementation files and version-specific configuration remain private.
 
 ## Validation sequence
 
-1. Repository safety and shell syntax checks.
-2. Synthetic CI plan/apply/rollback tests.
-3. Read-only plan against the real Home Assistant runtime.
-4. Human review of exact source, target, hashes and configuration diff.
-5. Timestamped backups.
-6. Theme and dashboard deployment.
-7. Guarded dashboard registration in `configuration.yaml`.
-8. Post-write configuration validation.
-9. Explicit Home Assistant restart.
-10. HTTP, log, desktop and iOS smoke tests.
+1. Repository safety and static quality checks.
+2. Read-only review of the proposed runtime scope.
+3. Human approval of the bounded change and recovery expectation.
+4. Protected change application.
+5. Configuration validation.
+6. Explicit service restart decision.
+7. Runtime availability and error review.
+8. Desktop browser acceptance.
+9. iOS Companion App acceptance.
+10. Reviewed documentation of the outcome.
 
 ## Results
 
 | Check | Result |
-|---|---|
-| Repository secret/safety scan | Passed |
-| Shell syntax | Passed |
-| Dashboard source structure | Passed |
-| Synthetic apply and rollback | Passed |
-| Real-runtime read-only plan | Passed |
-| Source-to-target SHA-256 match | Passed |
-| Pre-change config check | Passed |
-| Post-write config check | Passed |
-| Post-restart config check | Passed |
-| Home Assistant root HTTP | `200` |
-| New dashboard HTTP | `200` |
-| Relevant startup error scan | No finding |
+| --- | --- |
+| Repository safety checks | Passed |
+| Reviewed scope | Passed |
+| Recovery readiness | Confirmed privately |
+| Pre-change configuration validation | Passed |
+| Post-change configuration validation | Passed |
+| Service availability after restart | Passed |
+| Dashboard availability | Passed |
+| Relevant startup and configuration review | No blocking finding |
 | Desktop browser acceptance | Passed |
-| iOS Companion App acceptance | Passed after theme correction |
+| iOS Companion App acceptance | Passed after visual correction |
 | Existing default Overview | Preserved |
-| Rollback material | Created and verified available |
 
-## Restart observation
+## Client issue discovered during validation
 
-Home Assistant became reachable within approximately six seconds during the recorded production smoke. This is an observation from one validated restart, not a performance guarantee.
+The first iOS pass displayed surfaces differently from the accepted desktop presentation.
 
-## Mobile issue discovered during validation
+The cause was a client theme-mode difference rather than a failure of the main dashboard structure. I corrected the visual definitions, applied the reviewed update through the same controlled workflow, and repeated desktop and iOS acceptance.
 
-The first iOS smoke showed white control surfaces despite a correct dark appearance in the desktop browser.
-
-### Cause
-
-The clients were not necessarily requesting the same theme mode. Critical dark values existed only under the dark-mode branch, allowing light-mode fallback values to appear in the app.
-
-### Fix
-
-Critical theme values were defined:
-
-- at the top level;
-- under `modes.light`;
-- under `modes.dark`.
-
-The theme was redeployed through the same backup and config-check workflow, Home Assistant was restarted, and iOS acceptance then passed.
+The exact theme configuration is not public. The evidence supports a broader engineering claim: real-device and cross-client testing found a defect that static validation and desktop review did not reveal.
 
 ## Evidence handling
 
-Raw terminal reports, production backup names, real entity IDs and household screenshots remain private.
+The private evidence package includes the operational detail needed for maintenance and review. The public repository retains only:
 
-The public evidence consists of:
-
-- this result matrix;
-- sanitized configuration examples;
-- architecture and workflow diagrams;
-- an accurate description of the observed mobile issue and fix.
+- a bounded result matrix;
+- non-operational responsibility diagrams;
+- the accurate client-validation lesson;
+- explicit statements about what remains private.
 
 ## Residual risks
 
-- Visual regression testing is manual.
-- Native Home Assistant card rendering may evolve in future frontend releases.
-- Production entity renames can require dashboard maintenance.
-- A public screenshot still requires a separate sanitization review.
+- Visual regression testing remains manual.
+- Native Home Assistant rendering may evolve between platform releases.
+- Private device or entity changes can require dashboard maintenance.
+- Every future screenshot requires separate privacy and metadata review.
 
 ## Portfolio claim
 
 This evidence supports claims of:
 
 - Raspberry Pi and Docker operations;
-- Home Assistant dashboard engineering;
-- YAML and Bash implementation;
-- GitHub Actions validation;
-- guarded deployment and rollback design;
-- desktop and real-device iOS testing;
-- privacy-aware technical documentation.
+- Home Assistant dashboard and UX work;
+- version-controlled configuration discipline;
+- GitHub Actions safety validation;
+- controlled rollout and recovery thinking;
+- desktop and physical-device iOS testing;
+- privacy-aware technical communication.
 
-It does not claim a custom HTML frontend, a custom JavaScript component or card-mod-based styling.
+It does not publish or claim a reusable deployment package, custom frontend framework, private network design, or public copy of the production configuration.

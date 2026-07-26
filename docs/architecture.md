@@ -1,96 +1,76 @@
-# Architecture
+# Architecture and responsibility boundaries
 
-## System roles
+## System view
 
-The private environment uses a Raspberry Pi 5 as a small always-on platform for selected household services. This public repository describes roles and boundaries rather than copying the live topology.
+The private environment uses a Raspberry Pi 5 as an always-on platform for Home Assistant and selected supporting services. This public case study describes responsibility boundaries rather than the live topology or configuration.
 
 ```mermaid
 flowchart TB
-    CLIENTS[Desktop browser and iOS app]
-    NETWORK[Home network and controlled remote access]
-    PI[Raspberry Pi 5]
-    DOCKER[Docker runtime]
-    HA[Home Assistant]
-    SUPPORT[Supporting local services]
-    GIT[Private versioned source]
-    CI[GitHub Actions]
-    DOCS[Reviewed operational memory]
-    PUBLIC[Sanitized public showcase]
+    CLIENTS[Desktop and iOS clients]
+    PLATFORM[Raspberry Pi and container platform]
+    HOME[Home Assistant runtime]
+    PRIVATE[Private reviewed source and evidence]
+    CHECKS[Repository safety and review]
+    PUBLIC[Public case study]
 
-    CLIENTS --> NETWORK
-    NETWORK --> PI
-    PI --> DOCKER
-    DOCKER --> HA
-    DOCKER --> SUPPORT
-    GIT --> CI
-    CI --> PLAN[Read-only plan and human approval]
-    PLAN --> HA
-    HA --> EVIDENCE[Runtime validation evidence]
-    EVIDENCE --> DOCS
-    DOCS --> PUBLIC
+    CLIENTS --> HOME
+    HOME --> PLATFORM
+    PRIVATE --> CHECKS
+    CHECKS --> HOME
+    PRIVATE --> PUBLIC
 ```
 
-## Responsibilities
+The diagram is intentionally non-operational. It does not disclose network roles, access paths, service placement, or deploy mechanics.
 
-### Raspberry Pi and Docker
+## Responsibility boundaries
 
-- provide an always-on ARM64 runtime;
-- isolate Home Assistant and supporting services;
-- keep persistent Home Assistant data outside the container image;
-- make restart state and service ownership observable.
+### Runtime platform
+
+- provides an observable, always-on service environment;
+- separates application runtime from reviewed source material;
+- supports controlled restart and recovery decisions.
 
 ### Home Assistant
 
-- integrate household devices;
-- expose the existing default Overview;
-- load a separate versioned YAML dashboard;
-- load a versioned theme;
-- validate configuration before restart.
+- integrates the private household environment;
+- retains the existing Overview as a fallback;
+- exposes the separately developed dashboard and visual system;
+- provides configuration and runtime signals used during validation.
 
-### Private repository
+### Private engineering repository
 
-- store reviewed source files, not the entire runtime;
-- track work through GitHub Issues;
-- use pull requests as implementation evidence;
-- store durable Markdown decisions and sanitized runtime evidence;
-- reject credentials, databases, `.storage`, backups and raw runtime exports.
+- contains the reviewed implementation and operational procedures;
+- records accepted work, version history, and validation evidence;
+- rejects credentials, runtime databases, backups, and unsafe exports;
+- preserves recovery information outside the public portfolio.
 
-### Public showcase
+### Public case study
 
-- explain the architecture and engineering decisions;
-- publish generic configuration examples;
-- document verified outcomes;
-- omit real addressing, entity IDs, hostnames, locations and access details.
+- explains the problem, decisions, responsibilities, and verified outcomes;
+- demonstrates UI, operations, testing, and documentation skills;
+- contains no runnable deployment path or reusable configuration package;
+- omits the real topology, identifiers, routines, and access model.
 
-## Configuration flow
+## Evidence flow
 
 ```mermaid
-sequenceDiagram
-    participant Dev as Reviewed branch
-    participant CI as GitHub Actions
-    participant Plan as Read-only plan
-    participant Runtime as Home Assistant runtime
-    participant Evidence as Durable evidence
-
-    Dev->>CI: syntax, safety and synthetic rollback checks
-    CI-->>Dev: pass
-    Dev->>Plan: exact deployment ID
-    Plan->>Runtime: config check and target inspection
-    Runtime-->>Plan: state and hashes
-    Plan-->>Dev: exact proposed change
-    Dev->>Runtime: approved backup and atomic apply
-    Runtime->>Runtime: post-write config check
-    Runtime->>Runtime: explicit restart
-    Runtime-->>Evidence: HTTP, log, desktop and mobile smoke
+flowchart LR
+    INTENT[Accepted intent] --> REVIEW[Reviewed implementation]
+    REVIEW --> RUNTIME[Controlled runtime change]
+    RUNTIME --> TEST[Configuration and client validation]
+    TEST --> DECISION[Human acceptance]
+    DECISION --> RECORD[Durable private evidence]
+    RECORD --> CLAIM[Sanitized public claim]
 ```
+
+The public claim is derived from reviewed evidence, but the evidence package itself remains private.
 
 ## Design principles
 
-- One primary owner for routing and address assignment.
-- Local operation is validated before remote-maintenance concerns.
-- Runtime truth is not inferred from an old document.
-- Repository content is an allowlisted source set, not a live filesystem mirror.
-- Every production change has a baseline, backup, validation and rollback path.
-- Public material explains the engineering without exposing the environment.
+- Runtime truth is not inferred from an old document or a successful build.
+- Public Git is not a mirror of a live household environment.
+- Production change, restart, recovery, and acceptance are separate responsibilities.
+- Desktop success is not treated as mobile acceptance.
+- Public material demonstrates engineering judgement without teaching the private implementation.
 
-The real device inventory, network plan and configuration values remain private.
+The real device inventory, service topology, configuration layout, and network plan remain private.

@@ -19,13 +19,13 @@ jobs:
       - name: Validate whitespace
         run: git diff --check HEAD~1..HEAD || git diff --check
 
-      - name: Reject private runtime file types
+      - name: Reject private runtime and implementation artifacts
         shell: bash
         run: |
           set -Eeuo pipefail
-          forbidden='(^|/)(\.env|secrets\.yaml|\.storage)(/|$)|\.(db|sqlite|sqlite3|key|pem|p12|pfx|zip|tar|tgz|gz)$'
+          forbidden='(^|/)(\.env|secrets\.yaml|\.storage|examples)(/|$)|\.(db|sqlite|sqlite3|key|pem|p12|pfx|zip|tar|tgz|gz)$'
           if git ls-files | grep -E "$forbidden"; then
-            echo "Forbidden private or runtime file tracked." >&2
+            echo "Forbidden private, runtime, or reusable implementation artifact tracked." >&2
             exit 1
           fi
 
@@ -49,13 +49,17 @@ jobs:
             exit 1
           fi
 
-      - name: Parse YAML examples
+      - name: Reject environment-specific identifiers
         shell: bash
         run: |
           set -Eeuo pipefail
-          while IFS= read -r -d '' file; do
-            ruby -e 'require "yaml"; YAML.load_file(ARGV.fetch(0), aliases: true)' "$file"
-          done < <(find examples -type f -name '*.yaml' -print0)
+          patterns='entity_id:|(^|[^A-Za-z0-9_])(sensor|binary_sensor|light|switch|climate|humidifier|fan|weather)\.[A-Za-z0-9_]+'
+          if grep -RInE --exclude-dir=.git --exclude='public-safety.yml' "$patterns" .; then
+            echo "Environment-shaped Home Assistant identifier found in public showcase." >&2
+            exit 1
+          fi
 
-      - name: Confirm public safety statement
-        run: grep -Fq 'This is a portfolio case study, not a deployment package.' README.md
+      - name: Confirm non-deployable public boundary
+        run: |
+          grep -Fq 'This is a portfolio case study, not a deployment package.' README.md
+          grep -Fq 'reusable configuration examples' README.md
