@@ -2,6 +2,13 @@
 
 # Changelog
 
+## 2026-07-26 — visual publication readiness
+
+- Added a structured visual publication plan for future desktop, iOS, theme, responsive-layout, and cross-client evidence.
+- Defined exact safe capture roles, household-privacy exclusions, metadata handling, and a pre-publication checklist.
+- Required visuals to remain non-deployable and free of entity, device, network, account, household, location, diagnostic, and configuration details.
+- Linked the plan from the main case study so stable visuals can be added later without restructuring the recruiter narrative.
+
 ## 2026-07-26 — deep documentation and mobile UX hardening
 
 - Added coherent return navigation across the linked architecture, UI, operations, validation, security, and troubleshooting documents.
