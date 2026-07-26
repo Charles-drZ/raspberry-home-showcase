@@ -1,16 +1,22 @@
 # Changelog
 
-## 2026-07-26
+## 2026-07-26 — public-boundary hardening
 
-- Expanded the repository from a documentation-only overview into a validated Home Assistant dashboard and safe-operations case study.
-- Added a responsive native Home Assistant dashboard architecture.
-- Added a cross-client dark theme example covering both light and dark client modes.
-- Added sanitized dashboard and exact deployment-map examples.
-- Documented backup, config-check, guarded bootstrap, rollback and restart boundaries.
-- Added sanitized production validation evidence for desktop browser and iOS Companion App.
-- Added the real troubleshooting lesson from an iOS theme-mode discrepancy.
-- Updated architecture, security and privacy boundaries.
-- Kept all real network, host, entity, credential and household data private.
+- Reframed the repository as a non-deployable engineering case study.
+- Removed public dashboard YAML, theme YAML, and deployment-map examples.
+- Removed configuration snippets, visual values, entity placeholders, commands, mappings, and detailed rollout mechanics from supporting documents.
+- Retained recruiter-relevant product decisions, responsibility boundaries, cross-client validation, and verified outcomes.
+- Strengthened GitHub Actions checks to reject reusable implementation examples and environment-shaped Home Assistant identifiers.
+- Confirmed that the private repository remains the only source for implementation, operational procedures, and recovery material.
+
+## 2026-07-26 — production-validated v1
+
+- Expanded the repository from a documentation overview into a validated Home Assistant dashboard and safe-operations case study.
+- Documented a responsive native Home Assistant dashboard architecture.
+- Recorded sanitized production validation evidence for desktop browser and iOS Companion App.
+- Added the troubleshooting lesson from an iOS theme-mode discrepancy.
+- Updated architecture, security, and privacy boundaries.
+- Kept all real network, host, entity, credential, and household data private.
 
 ## 2026-07-12
 
