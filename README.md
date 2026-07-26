@@ -1,3 +1,5 @@
+[← Developer profile](https://github.com/Charles-drZ)
+
 # Raspberry Home — Versioned Home Assistant & Safe Operations Case Study
 
 Raspberry Home is a privacy-aware homelab project showing how I turned a working Raspberry Pi 5 and Home Assistant environment into a versioned, reviewable, rollback-aware, and cross-client validated platform.
@@ -6,15 +8,13 @@ Raspberry Home is a privacy-aware homelab project showing how I turned a working
 
 ## At a glance
 
-| Area | Current state |
-| --- | --- |
-| Runtime | Raspberry Pi 5 with Docker and Home Assistant |
-| Product surface | Separate responsive Home Assistant dashboard |
-| Client validation | Desktop browser and iOS Companion App |
-| Operations | Reviewed change, backup, validation, rollback, and explicit restart boundaries |
-| Quality controls | GitHub Actions, repository safety checks, runtime smoke, and user acceptance |
-| Release state | Production-validated v1; additional themes and visual refinements continue privately |
-| Public material | Engineering decisions, privacy-reviewed outcomes, and non-deployable diagrams |
+**Runtime:** Raspberry Pi 5 with Docker and Home Assistant  
+**Product surface:** Separate responsive Home Assistant dashboard  
+**Client validation:** Desktop browser and iOS Companion App  
+**Operations:** Reviewed change, backup, validation, rollback, and explicit restart boundaries  
+**Quality controls:** GitHub Actions, repository safety checks, runtime smoke, and user acceptance  
+**Release state:** Production-validated v1; additional themes and visual refinements continue privately  
+**Public material:** Engineering decisions, privacy-reviewed outcomes, and non-deployable diagrams
 
 ## What this proves
 
