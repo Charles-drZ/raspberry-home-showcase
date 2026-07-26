@@ -1,3 +1,5 @@
+[← Raspberry Home case study](../README.md)
+
 # Sanitized validation evidence
 
 ## Scope
@@ -29,19 +31,17 @@ Implementation files and version-specific configuration remain private.
 
 ## Results
 
-| Check | Result |
-| --- | --- |
-| Repository safety checks | Passed |
-| Reviewed scope | Passed |
-| Recovery readiness | Confirmed privately |
-| Pre-change configuration validation | Passed |
-| Post-change configuration validation | Passed |
-| Service availability after restart | Passed |
-| Dashboard availability | Passed |
-| Relevant startup and configuration review | No blocking finding |
-| Desktop browser acceptance | Passed |
-| iOS Companion App acceptance | Passed after visual correction |
-| Existing default Overview | Preserved |
+**Repository safety checks:** Passed  
+**Reviewed scope:** Passed  
+**Recovery readiness:** Confirmed privately  
+**Pre-change configuration validation:** Passed  
+**Post-change configuration validation:** Passed  
+**Service availability after restart:** Passed  
+**Dashboard availability:** Passed  
+**Relevant startup and configuration review:** No blocking finding  
+**Desktop browser acceptance:** Passed  
+**iOS Companion App acceptance:** Passed after visual correction  
+**Existing default Overview:** Preserved
 
 ## Client issue discovered during validation
 
@@ -55,7 +55,7 @@ The exact theme configuration is not public. The evidence supports a broader eng
 
 The private evidence package includes the operational detail needed for maintenance and review. The public repository retains only:
 
-- a bounded result matrix;
+- a bounded result summary;
 - non-operational responsibility diagrams;
 - the accurate client-validation lesson;
 - explicit statements about what remains private.
@@ -80,3 +80,7 @@ This evidence supports claims of:
 - privacy-aware technical communication.
 
 It does not publish or claim a reusable deployment package, custom frontend framework, private network design, or public copy of the production configuration.
+
+---
+
+[← Return to Raspberry Home case study](../README.md)

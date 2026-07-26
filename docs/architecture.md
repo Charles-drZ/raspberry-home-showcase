@@ -1,3 +1,5 @@
+[← Raspberry Home case study](../README.md)
+
 # Architecture and responsibility boundaries
 
 ## System view
@@ -54,7 +56,7 @@ The diagram is intentionally non-operational. It does not disclose network roles
 ## Evidence flow
 
 ```mermaid
-flowchart LR
+flowchart TD
     INTENT[Accepted intent] --> REVIEW[Reviewed implementation]
     REVIEW --> RUNTIME[Controlled runtime change]
     RUNTIME --> TEST[Configuration and client validation]
@@ -74,3 +76,7 @@ The public claim is derived from reviewed evidence, but the evidence package its
 - Public material demonstrates engineering judgement without teaching the private implementation.
 
 The real device inventory, service topology, configuration layout, and network plan remain private.
+
+---
+
+[← Return to Raspberry Home case study](../README.md)

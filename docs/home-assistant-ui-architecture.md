@@ -1,3 +1,5 @@
+[← Raspberry Home case study](../README.md)
+
 # Home Assistant UI and UX decisions
 
 ## Problem
@@ -78,3 +80,7 @@ The interface does not attempt to disguise unavailable device state. A missing o
 The dashboard passed configuration validation, runtime availability checks, desktop acceptance, and real-device iOS acceptance. A client-specific visual discrepancy was found, corrected, and revalidated.
 
 No configuration snippet, theme palette, entity placeholder set, or deployable dashboard example is published as part of this result.
+
+---
+
+[← Return to Raspberry Home case study](../README.md)
