@@ -1,147 +1,80 @@
-# Home Assistant UI architecture
+# Home Assistant UI and UX decisions
 
 ## Problem
 
-A default Home Assistant dashboard is useful for discovery, but it is not automatically a maintainable product surface. The project needed a dashboard that was:
-
-- intentionally structured around everyday tasks;
-- version controlled and reviewable;
-- safe to deploy without replacing the full runtime configuration;
-- usable on desktop and mobile;
-- visually consistent without introducing unnecessary frontend dependencies;
-- documented well enough to reproduce and maintain later.
+A default smart-home dashboard is useful for discovery, but it is not automatically a clear, maintainable product surface. The project needed an interface that was intentionally structured, reviewable, responsive, and safe to change without exposing or replacing the private runtime configuration.
 
 ## Constraints
 
-- The existing storage-mode Overview had to remain untouched.
-- Real entity IDs, device identifiers and household details could not appear in public material.
-- The repository could not become a mirror of Home Assistant's `.storage` or database state.
-- Production changes required backup, validation and rollback.
-- No custom JavaScript or third-party visual card would be added unless native components could not meet the requirement.
+- The existing default Overview had to remain available.
+- The public case study could not reveal real rooms, devices, identifiers, household routines, or configuration.
+- Desktop and mobile clients both required acceptance testing.
+- Visual improvements could not justify unnecessary frontend dependencies.
+- Every production change needed an evidence and recovery path.
 
-## Decision: separate YAML dashboard
+## Product decision
 
-The implementation registers a separate YAML-mode dashboard and keeps the existing Overview available as a fallback.
+I built a separate dashboard rather than redesigning the existing Overview in place. This kept a known fallback available and created a clear boundary between the established runtime surface and the new version-controlled experience.
 
-```yaml
-lovelace:
-  dashboards:
-    portfolio-home:
-      mode: yaml
-      filename: dashboards/portfolio-home.yaml
-      title: Portfolio Home
-      icon: mdi:home-automation
-      show_in_sidebar: true
-      require_admin: false
-```
-
-The public example uses generic names. Production names and entity mappings remain private.
+The public repository documents the decision and outcome only. Registration details, file structure, mappings, theme values, and implementation remain private.
 
 ## Information architecture
 
-The dashboard is organised by user intent rather than by integration or vendor.
+The interface is organised around user intent rather than integrations or device vendors.
 
 ```mermaid
 flowchart TD
-    HOME[Home dashboard]
-    HOME --> OVERVIEW[Overview and weather]
-    HOME --> LIVING[Living space]
-    HOME --> BEDROOM[Bedroom and humidity]
-    HOME --> BATH[Bathroom environment]
-    HOME --> KITCHEN[Kitchen and outdoor lights]
-    HOME --> UTILITY[Utility and energy]
+    HOME[Daily home overview]
+    HOME --> CONTEXT[Environmental context]
+    HOME --> CONTROL[Frequently used controls]
+    HOME --> ROOMS[Room-level state]
+    HOME --> UTILITY[Maintenance and utility information]
 ```
 
-Each section has one clear responsibility. Frequently used actions are Tile cards; richer equipment uses native domain-specific cards.
+This structure reduces navigation cost and keeps related state and actions close together.
 
 ## Native component strategy
 
-The version uses:
+The validated v1 uses native Home Assistant components. That choice reduced dependency risk, preserved familiar interaction behaviour, and allowed the platform to handle responsive layout across desktop and mobile.
 
-- Sections view for responsive layout;
-- Heading cards and entity badges for hierarchy;
-- Tile cards for lights, switches, fans and sensor summaries;
-- Thermostat card for primary climate control;
-- Humidifier card for dehumidification;
-- Weather forecast card for the overview;
-- native Tile features for brightness, colour temperature, modes and short trends.
-
-This avoided Mushroom, card-mod, layout-card and custom JavaScript dependencies in v1.
+The public case study intentionally omits the component configuration and entity mapping. The value being demonstrated is the product and validation decision, not a reusable YAML implementation.
 
 ## Responsive behaviour
 
-The Sections view handles the desktop-to-mobile transition:
+The desktop view uses available width to show more context at once. On mobile, the same hierarchy reflows into a touch-friendly vertical experience without changing the underlying user model.
 
-- multiple sections can appear side by side on wide screens;
-- cards naturally reflow into a touch-friendly vertical layout on mobile;
-- controls remain close to their related state;
-- long diagnostic entity lists are intentionally excluded.
+Long diagnostic lists and rarely used maintenance controls are kept away from the primary daily surface.
 
-## Theme architecture
+## Cross-client theme lesson
 
-A custom theme defines a dark blue-black surface, blue and teal accents, amber lighting state, green active switches and clear warning colours.
+The first desktop acceptance passed, but the iOS Companion App exposed inconsistent fallback surfaces because the two clients did not request visual modes identically.
 
-The first desktop validation passed, but iOS exposed an important client difference: the Companion App could request light mode and fall back to white control surfaces.
+I treated this as a real product defect rather than a cosmetic exception: the visual system was corrected, the reviewed change was redeployed through the controlled operations flow, and acceptance was repeated on both clients.
 
-The final theme defines critical variables in three places:
+The exact theme variables and implementation are private. The public lesson is that multi-client UI work requires validation on the clients users actually operate.
 
-1. theme root;
-2. `modes.light`;
-3. `modes.dark`.
+## Failure visibility
 
-```yaml
-"Portfolio Home":
-  primary-background-color: "#0B1118"
-  card-background-color: "#151F2B"
-  primary-text-color: "#F3F6FA"
-  modes:
-    light:
-      primary-background-color: "#0B1118"
-      card-background-color: "#151F2B"
-    dark:
-      primary-background-color: "#0B1118"
-      card-background-color: "#151F2B"
-```
-
-This kept the dashboard visually consistent across desktop and iOS without custom CSS injection.
-
-## Entity mapping boundary
-
-Production entity mapping is documented privately because entity IDs may contain device, room or vendor details.
-
-The public version uses semantic placeholders such as:
-
-- `climate.living_room`;
-- `sensor.indoor_temperature`;
-- `light.kitchen`;
-- `humidifier.bedroom`;
-- `switch.water_heater`.
-
-The architecture is reusable while the actual environment remains undisclosed.
-
-## Failure and unavailable states
-
-The dashboard intentionally relies on Home Assistant's native unavailable-state behaviour. No automation hides missing entities. This keeps failures visible during maintenance rather than presenting a falsely healthy UI.
+The interface does not attempt to disguise unavailable device state. A missing or unhealthy integration should remain observable during maintenance rather than appearing falsely normal.
 
 ## Trade-offs
 
-### Benefits
+**Benefits**
 
-- minimal frontend dependency risk;
-- small and readable YAML surface;
-- responsive behaviour supplied by Home Assistant;
-- easier upgrades and rollback;
-- clear separation from the default dashboard.
+- lower frontend dependency risk;
+- familiar platform-native interactions;
+- responsive behaviour across clients;
+- clear fallback to the existing Overview;
+- smaller operational change surface.
 
-### Costs
+**Costs**
 
-- native cards provide less visual freedom than a custom frontend;
-- visual regression testing remains manual;
-- entity renames require configuration maintenance;
-- Home Assistant frontend changes can alter card rendering over time.
+- less visual freedom than a custom frontend;
+- manual visual regression testing;
+- continued maintenance as devices and platform rendering evolve.
 
 ## Result
 
-The dashboard passed production configuration checks, restart and HTTP smoke tests, desktop acceptance and iOS acceptance. A mobile theme discrepancy was discovered through real-device testing, fixed and revalidated.
+The dashboard passed configuration validation, runtime availability checks, desktop acceptance, and real-device iOS acceptance. A client-specific visual discrepancy was found, corrected, and revalidated.
 
-This is the kind of result the repository is intended to prove: not just YAML authoring, but architecture, controlled rollout, evidence and maintenance thinking.
+No configuration snippet, theme palette, entity placeholder set, or deployable dashboard example is published as part of this result.
