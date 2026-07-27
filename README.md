@@ -95,6 +95,19 @@ Every image must exclude real entity identifiers, locations, household details, 
 
 See the [visual publication plan](assets/SCREENSHOT_PLAN.md) for the planned capture set, household-privacy rules, and pre-publication checklist.
 
+## Visual preview
+
+`assets/visuals/` is reserved for future, privacy-reviewed screenshots so visual evidence can be added without redesigning the case study. No screenshots are included yet.
+
+Privacy boundary: every future image must exclude household, account, location, network, device, notification, diagnostic, and configuration details, using approved or synthetic content where needed.
+
+Planned images:
+
+- [ ] `assets/visuals/raspberry-desktop-dashboard.png`
+- [ ] `assets/visuals/raspberry-ios-companion.png`
+- [ ] `assets/visuals/raspberry-theme-variant.png`
+- [ ] `assets/visuals/raspberry-cross-client-consistency.png`
+
 ## Public boundary
 
 The project is deliberately split into two layers:

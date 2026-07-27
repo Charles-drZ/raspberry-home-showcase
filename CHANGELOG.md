@@ -2,6 +2,10 @@
 
 # Changelog
 
+## 2026-07-27 — visual placeholder preparation
+
+- Reserved `assets/visuals/` and documented the planned privacy-reviewed image set without adding screenshots.
+
 ## 2026-07-26 — visual publication readiness
 
 - Added a structured visual publication plan for future desktop, iOS, theme, responsive-layout, and cross-client evidence.
