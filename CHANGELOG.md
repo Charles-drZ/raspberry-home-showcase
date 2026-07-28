@@ -2,6 +2,14 @@
 
 # Changelog
 
+## 2026-07-28 — Midnight v2 mobile visual publication
+
+- Published two privacy-reviewed iOS Companion App captures for the production-validated Midnight Signature Skin v2.
+- Added the climate idle-versus-active hierarchy and the bedroom state-aware composition to the main case study.
+- Updated the public UI architecture with the Midnight component-state model, mobile-label lesson, and bounded styling dependency.
+- Recorded the publication review, approved generic labels and static values, alt text, captions, and remaining desktop follow-up.
+- Updated the case study from the earlier v1 summary to the controlled Midnight v2 rollout, rollback, and exact reapply result.
+
 ## 2026-07-27 — visual placeholder preparation
 
 - Reserved `assets/visuals/` and documented the planned privacy-reviewed image set without adding screenshots.
