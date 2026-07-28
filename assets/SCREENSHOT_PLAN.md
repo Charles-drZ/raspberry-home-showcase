@@ -23,6 +23,27 @@ The goal is to show responsive Home Assistant UX, cross-client validation, and v
 5. **`visuals/05-responsive-information-architecture.png` — Optional responsive overview**  
    Use a redrawn or synthetic composition to explain how the same information hierarchy adapts between desktop and mobile without reproducing the deployable dashboard.
 
+## Published visual set
+
+### 2026-07-28 — Midnight v2 iOS Companion App
+
+Two reviewed iOS captures are published in the main README:
+
+- climate hero and active control hierarchy;
+- bedroom hero, action, sensor, power, and maintenance composition.
+
+Publication decisions:
+
+- the Home Assistant account drawer, profile, URLs, hostnames, IP addresses, notifications, and access details are absent;
+- no entity ID, device ID, integration ID, credential, diagnostic output, configuration, or operational path is visible;
+- room labels are generic product labels rather than identifying names;
+- the displayed state values are static and were explicitly approved by the repository owner for portfolio use;
+- the iOS status information contains no notification content or personal identifier and was explicitly reviewed as safe for this release;
+- the source captures were rendered through GitHub image attachments before public embedding;
+- alt text and technical captions describe the product claim without exposing implementation details.
+
+This publication completes the first stable mobile visual deliverable. Desktop and cross-client comparison assets remain separate follow-up work.
+
 ## Capture and redrawing guidance
 
 - Prefer a dedicated safe dashboard state or redrawn presentation over a raw everyday household screenshot.
@@ -47,16 +68,18 @@ The goal is to show responsive Home Assistant UX, cross-client validation, and v
 
 ## Pre-publication checklist
 
-- [ ] The dashboard/theme state is stable and already accepted on the relevant client.
-- [ ] The visual proves a specific claim already supported by the written case study.
-- [ ] All labels and state values are synthetic, generalized, or explicitly approved for publication.
-- [ ] No entity, device, network, account, household, location, schedule, presence, diagnostic, or access detail is visible.
-- [ ] The image does not reveal reusable dashboard configuration or operational mechanics.
-- [ ] Desktop and mobile crops are readable in GitHub's narrow and wide layouts.
-- [ ] Browser chrome, notifications, status details, and unrelated application content are absent.
-- [ ] Image metadata has been removed and the exported file has been reviewed separately.
-- [ ] The README caption accurately describes the evidence and the private boundary.
-- [ ] Final publication approval has been given by the repository owner.
+- [x] The dashboard/theme state is stable and already accepted on the relevant client.
+- [x] The published mobile visuals prove claims already supported by the written case study.
+- [x] All visible labels and state values are generalized or explicitly approved for publication.
+- [x] No entity, device, network, account, household, location, schedule, presence, diagnostic, or access detail is visible.
+- [x] The images do not reveal reusable dashboard configuration or operational mechanics.
+- [x] The mobile captures are readable in GitHub's narrow and wide layouts.
+- [x] No notification content or unrelated application surface is visible.
+- [x] The rendered publication assets contain no source EXIF or device metadata surface.
+- [x] README captions accurately describe the evidence and the private boundary.
+- [x] Final mobile publication approval was given by the repository owner.
+
+Desktop and synthetic cross-client assets will receive a separate review rather than inheriting this approval automatically.
 
 ---
 
