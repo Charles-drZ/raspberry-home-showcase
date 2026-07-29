@@ -92,7 +92,15 @@ The validated Midnight v2 keeps native Home Assistant cards as the product surfa
 
 ## Visual evidence
 
-The following iOS Companion App captures were reviewed for publication. They contain no IP address, hostname, account name, entity identifier, device identifier, credential, notification content, access path, or precise location. The generic room labels and static state values were explicitly approved for this portfolio case study.
+The visual set combines an owner-approved presentation composite with privacy-reviewed iOS Companion App captures. The composite is based on the production-validated layouts but is not a raw production screenshot. None of the published visuals exposes an IP address, hostname, account name, entity identifier, device identifier, credential, notification content, access path, or precise location.
+
+### Midnight across devices
+
+<p align="center">
+  <img src="assets/visuals/raspberry-home-midnight-across-devices.webp" width="700" alt="Raspberry Home Midnight showcase with a desktop Home Assistant dashboard on the left and two iPhone dashboard views on the right." />
+</p>
+
+This presentation composite shows the production-validated Raspberry Home Midnight visual system across desktop and iPhone layouts. It is based on privacy-reviewed production captures rather than presented as a raw runtime screenshot; the dashboard implementation, entity mapping, and operational configuration remain private.
 
 ### Midnight climate and control hierarchy
 

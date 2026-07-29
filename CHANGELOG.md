@@ -2,6 +2,13 @@
 
 # Changelog
 
+## 2026-07-29 — Midnight cross-device hero publication
+
+- Published the owner-approved Raspberry Home Midnight desktop-and-iPhone presentation composite as a repository asset.
+- Disclosed that the flagship image is based on privacy-reviewed production captures and is not a raw runtime screenshot.
+- Recorded the metadata-stripped WebP dimensions, SHA256, alt text, technical caption, and publication decision.
+- Completed the desktop/cross-client visual follow-up while keeping the dashboard implementation, entity mapping, and operational configuration private.
+
 ## 2026-07-28 — Midnight v2 mobile visual publication
 
 - Published two privacy-reviewed iOS Companion App captures for the production-validated Midnight Signature Skin v2.
