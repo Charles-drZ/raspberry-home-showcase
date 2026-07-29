@@ -25,6 +25,23 @@ The goal is to show responsive Home Assistant UX, cross-client validation, and v
 
 ## Published visual set
 
+### 2026-07-29 — Midnight cross-device presentation composite
+
+The owner-approved `visuals/raspberry-home-midnight-across-devices.webp` is published in the main README as the first desktop-and-iPhone flagship visual.
+
+Publication decisions:
+
+- the image is explicitly classified as a presentation composite based on privacy-reviewed production captures, not as a raw production screenshot;
+- the desktop and iPhone layouts communicate an already validated responsive product hierarchy without publishing dashboard configuration or entity mapping;
+- visible labels are generic, and the displayed values are static presentation content;
+- no IP address, hostname, account name, entity ID, device ID, integration ID, credential, notification, access path, precise location, or operational detail is visible;
+- the final repository export is a metadata-stripped WebP at `699 × 393`;
+- the final file SHA256 is `4eb0eb009674d4c8e16898446161b4ee96af14862cf51b83087f2ebbcf61f614`;
+- alt text and the README caption disclose the private implementation boundary and the image's presentation nature;
+- final publication approval was given by the repository owner.
+
+This publication completes the desktop/cross-client deliverable while preserving the real iOS captures as separate client-level evidence.
+
 ### 2026-07-28 — Midnight v2 iOS Companion App
 
 Two reviewed iOS captures are published in the main README:
@@ -42,7 +59,7 @@ Publication decisions:
 - the source captures were rendered through GitHub image attachments before public embedding;
 - alt text and technical captions describe the product claim without exposing implementation details.
 
-This publication completes the first stable mobile visual deliverable. Desktop and cross-client comparison assets remain separate follow-up work.
+This publication completes the first stable mobile visual deliverable. The separately reviewed cross-client presentation composite now completes the desktop/iPhone follow-up.
 
 ## Capture and redrawing guidance
 
@@ -79,7 +96,15 @@ This publication completes the first stable mobile visual deliverable. Desktop a
 - [x] README captions accurately describe the evidence and the private boundary.
 - [x] Final mobile publication approval was given by the repository owner.
 
-Desktop and synthetic cross-client assets will receive a separate review rather than inheriting this approval automatically.
+The cross-client presentation composite passed its own review:
+
+- [x] It proves a desktop-and-iPhone consistency claim already supported by production acceptance.
+- [x] It is disclosed as a presentation composite rather than a raw runtime screenshot.
+- [x] Its labels and values are generic presentation content.
+- [x] No household, account, network, entity, device, notification, location, diagnostic, or access detail is visible.
+- [x] The repository export contains no source EXIF, XMP, ICC, or device metadata.
+- [x] The final dimensions and SHA256 are recorded.
+- [x] Final cross-client publication approval was given by the repository owner.
 
 ---
 
