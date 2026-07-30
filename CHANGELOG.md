@@ -2,6 +2,14 @@
 
 # Changelog
 
+## 2026-07-30 — Graphite production rollout and visual publication
+
+- Published privacy-reviewed Graphite production evidence for the full desktop dashboard and two iOS Companion App views.
+- Updated the case study from a Midnight-only release summary to production-validated Midnight and Graphite outcomes.
+- Documented the exact-review, read-only plan, approved deploy, protected backup, configuration validation, restart, HTTP smoke, durable evidence, and rollback-ready operating model without publishing reusable commands or environment details.
+- Recorded the Graphite visual publication decision, selected capture roles, dimensions, alt text, captions, and privacy boundary.
+- Preserved the wider multi-theme switcher and implementation details as private follow-up work.
+
 ## 2026-07-29 — Midnight cross-device hero publication
 
 - Published the owner-approved Raspberry Home Midnight desktop-and-iPhone presentation composite as a repository asset.
