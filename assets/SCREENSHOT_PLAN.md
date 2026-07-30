@@ -25,6 +25,27 @@ The goal is to show responsive Home Assistant UX, cross-client validation, and v
 
 ## Published visual set
 
+### 2026-07-30 — Graphite production desktop and iOS evidence
+
+Three owner-approved production captures are published in the main README:
+
+- full desktop dashboard overview;
+- iOS overview and climate hierarchy;
+- iOS bedroom state composition.
+
+Publication decisions:
+
+- the captures were taken after an exact commit-bound Graphite deployment, configuration validation, restart, HTTP smoke, and cross-client acceptance;
+- the GitHub-rendered `user-attachments` assets are reused directly from the private rollout issue rather than copying operational material into the public repository;
+- visible room labels and state values were explicitly approved by the repository owner for portfolio publication;
+- no IP address, hostname, account name, entity ID, device ID, integration ID, credential, notification content, access path, precise location, command, file path, backup identifier, or deploy token is visible;
+- the desktop image is `1858 × 847`, and both selected iOS images are `603 × 1311` in their rendered GitHub attachment form;
+- the images demonstrate responsive layout, active/idle/off/warning/unavailable state separation, and consistent Graphite rendering without publishing configuration or entity mapping;
+- alt text and captions disclose that these are production captures while preserving the private implementation boundary;
+- final Graphite visual publication approval was given by the repository owner.
+
+This publication moves the case study from a Midnight-only presentation to a production-validated multi-theme result while keeping the broader theme-switcher implementation private.
+
 ### 2026-07-29 — Midnight cross-device presentation composite
 
 The owner-approved `visuals/raspberry-home-midnight-across-devices.webp` is published in the main README as the first desktop-and-iPhone flagship visual.
@@ -105,6 +126,15 @@ The cross-client presentation composite passed its own review:
 - [x] The repository export contains no source EXIF, XMP, ICC, or device metadata.
 - [x] The final dimensions and SHA256 are recorded.
 - [x] Final cross-client publication approval was given by the repository owner.
+
+The Graphite production captures passed a separate review:
+
+- [x] They prove claims already supported by the commit-bound production rollout and visual acceptance.
+- [x] The selected set covers desktop overview, mobile hierarchy, and state composition without unnecessary duplication.
+- [x] No operational transcript, path, commit, hash, backup, token, account, network, entity, device, notification, or location detail is visible.
+- [x] The selected GitHub attachment renders contain no exposed source metadata surface.
+- [x] Alt text and captions distinguish production evidence from deployable implementation.
+- [x] Final Graphite publication approval was given by the repository owner.
 
 ---
 
