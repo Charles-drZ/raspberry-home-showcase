@@ -148,9 +148,9 @@ The project is split deliberately:
 - the private operational repository contains the real environment knowledge, implementation, tests, privileged tooling, deployment logic, runtime evidence, and recovery procedures;
 - this public repository contains independently written explanation, non-deployable architecture, privacy-reviewed visuals, and bounded verified outcomes.
 
-No real IP addresses, locations, hostnames, entity identifiers, device IDs, credentials, remote-access details, private keys, backups, raw logs, copied topology, deploy mappings, privileged scripts, or reusable production configuration are published here.
+No real IP addresses, locations, hostnames, entity identifiers, device IDs, credentials, remote-access details, private keys, backups, raw logs, copied topology, deploy mappings, privileged scripts, reusable production configuration, or reusable configuration examples are published here.
 
-**This is an engineering case study, not a deployment package.**
+**This is a portfolio case study, not a deployment package.**
 
 ## Explore the case study
 
